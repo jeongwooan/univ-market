@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List; // 2025/10/14 추가
+
 /**
  * 상품 엔티티에 대한 데이터 액세스 인터페이스
  * JpaRepository를 확장하여 기본적인 CRUD 기능을 제공합니다.
@@ -53,4 +55,12 @@ public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpec
      * @return 해당 대학교 학생들의 상품 목록 페이지
      */
     Page<Product> findBySellerUniversityName(String universityName, Pageable pageable);
+
+    /**
+     * 2025/10/14 추가
+     * 특정 판매자 ID로 상품을 조회하는 메서드
+     * * @param sellerId 판매자 ID
+     * @return 해당 판매자의 상품 목록
+     */
+    List<Product> findBySellerId(Long sellerId);
 }

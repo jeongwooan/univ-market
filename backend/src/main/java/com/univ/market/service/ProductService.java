@@ -220,4 +220,21 @@ public class ProductService {
         // 상품 삭제
         productRepository.delete(product);
     }
+    /**
+     * 2025/10/14 추가
+     * 특정 판매자의 상품 목록을 조회하는 메서드 (마이페이지에서 사용)
+     *
+     * @param sellerId 판매자 ID
+     * @return 상품 목록
+     */
+    @Transactional(readOnly = true)
+    public List<ProductResponse> getProductsBySeller(Long sellerId) {
+        // Repository에서 판매자 ID로 상품 목록을 가져옵니다.
+        List<Product> products = productRepository.findBySellerId(sellerId);
+        
+        // DTO로 변환하여 반환합니다.
+        return products.stream()
+                .map(ProductResponse::fromEntity)
+                .collect(Collectors.toList());
+    }    
 }
