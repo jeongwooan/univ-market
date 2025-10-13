@@ -14,6 +14,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.Arrays;
 
@@ -71,9 +72,7 @@ public class SecurityConfig {
             .and()
             // JWT 인증 필터 추가
             .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), 
-                    UsernamePasswordAuthenticationFilter.class);
-
-
+                    UsernamePasswordAuthenticationFilter.class)
 
             // 2025/10/14 추가, 마이페이지 진입시 CORS 오류 해결 : 인증 실패 시 401 Unauthorized 응답 반환 (리다이렉트 방지)
             .exceptionHandling().authenticationEntryPoint((request, response, authException) -> {
