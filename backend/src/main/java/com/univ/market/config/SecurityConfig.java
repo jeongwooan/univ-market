@@ -69,6 +69,11 @@ public class SecurityConfig {
             // OAuth2 로그인 설정
             .oauth2Login()
                 .successHandler(oAuth2SuccessHandler)
+
+                // 2025/10/14 추가, OAuth2 인증 요청 필터의 기본 URI를 프론트엔드 경로로 명시적으로 설정
+                .authorizationEndpoint()
+                .baseUri("/api/oauth2/authorization") // 이 부분이 핵심입니다.
+                .and()
             .and()
             // JWT 인증 필터 추가
             .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), 
