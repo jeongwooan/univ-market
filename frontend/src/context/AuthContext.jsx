@@ -23,29 +23,28 @@ export const AuthProvider = ({ children }) => {
     /**
      * 로컬 스토리지의 토큰을 확인하고 사용자 정보를 로드하는 함수
      */
-    const loadUser = async () => {
-      const token = localStorage.getItem('token');
+const loadUser = async () => {
+  const token = localStorage.getItem('token');
+  console.log('loadUser 실행, 토큰:', token); // 추가
 
-      // 토큰이 없으면 로딩 상태만 해제
-      if (!token) {
-        setLoading(false);
-        return;
-      }
+  if (!token) {
+    setLoading(false);
+    return;
+  }
 
-      try {
-        // 사용자 정보 가져오기
-        const userData = await getCurrentUser();
-        setUser(userData);
-        setIsAuthenticated(true);
-      } catch (error) {
-        console.error('사용자 정보 로딩 실패:', error);
-        // 에러 발생 시 토큰 제거
-        localStorage.removeItem('token');
-      } finally {
-        setLoading(false);
-      }
-    };
-
+  try {
+    console.log('사용자 정보 요청 중...'); // 추가
+    const userData = await getCurrentUser();
+    console.log('받은 사용자 데이터:', userData); // 추가
+    setUser(userData);
+    setIsAuthenticated(true);
+  } catch (error) {
+    console.error('사용자 정보 로딩 실패:', error);
+    localStorage.removeItem('token');
+  } finally {
+    setLoading(false);
+  }
+};
     loadUser();
   }, []);
 
