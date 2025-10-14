@@ -14,7 +14,7 @@
 
 ##### Spring Security
 
-##### MySQL 8.0.41
+##### MariaDB 12.0.2
 
 ##### OAuth 2.0 (카카오 로그인)
 
@@ -59,7 +59,7 @@
 
 1. Java 17 이상
 2. Gradle
-3. MySQL 8.0
+3. MariaDB 12.0.2
 4. AWS 계정 (S3 사용)
 5. 카카오 개발자 계정 (OAuth 사용)
 
