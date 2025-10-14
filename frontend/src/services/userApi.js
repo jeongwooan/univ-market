@@ -1,4 +1,5 @@
-import api from './api';
+// import api from './api';
+import { api, publicApi } from './api'; // 2025/10/15 수정된 import 방식
 
 /**
  * 대학교 인증 이메일을 전송하는 API

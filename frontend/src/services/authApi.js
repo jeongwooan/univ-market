@@ -1,4 +1,5 @@
-import api from './api';
+// import api from './api';
+import { api, publicApi } from './api'; // 2025/10/15 수정된 import 방식
 
 /**
  * 현재 로그인된 사용자 정보를 가져오는 API

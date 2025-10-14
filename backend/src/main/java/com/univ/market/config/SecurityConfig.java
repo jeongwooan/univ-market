@@ -18,6 +18,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.Arrays;
 
+// 10/15 추가
+import org.springframework.http.HttpMethod; // HttpMethod
+
 /**
  * Spring Security 설정 클래스
  * 보안 설정, 인증/인가 규칙, CORS 설정 등을 정의합니다.
@@ -57,7 +60,10 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 // 인증 없이 접근 가능한 URL
                 .requestMatchers("/api/auth/**", "/login/**", "/oauth2/**", "/api/categories").permitAll()
-                .requestMatchers("/api/products").permitAll() // 상품 목록 조회는 인증 없이도 가능
+
+                // .requestMatchers("/api/products").permitAll() // 상품 목록 조회는 인증 없이도 가능  --> 10/15 주석처리
+                // 10/15 추가, GET 요청에 대해 상품 관련 모든 경로 허용
+                .requestMatchers(HttpMethod.GET, "/api/products/**").permitAll()
                 // 인증이 필요한 URL
                 .requestMatchers("/api/products/*/reserve", "/api/products/*/complete").authenticated()
                 .requestMatchers("/api/upload/**").authenticated()
